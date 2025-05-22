@@ -5,4 +5,6 @@ module ap.restaurant.restaurant {
 
     opens ap.restaurant.restaurant to javafx.fxml;
     exports ap.restaurant.restaurant;
+    exports ap.restaurant.restaurant.Models;
+    opens ap.restaurant.restaurant.Models to javafx.fxml;
 }
