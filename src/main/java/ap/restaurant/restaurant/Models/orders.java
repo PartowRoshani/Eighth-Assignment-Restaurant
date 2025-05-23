@@ -1,12 +1,14 @@
 package ap.restaurant.restaurant.Models;
 
+import java.time.LocalDateTime;
+
 public class orders {
     private int order_id;
     private  int user_id;
-    private String created_at;
+    private LocalDateTime created_at;
     private double total_price;
 
-    public orders(int order_id, int user_id, String created_at, double total_price){
+    public orders(int order_id, int user_id, LocalDateTime created_at, double total_price){
         this.order_id = order_id;
         this.user_id = user_id;
         this.created_at = created_at;
@@ -21,7 +23,7 @@ public class orders {
         this.user_id = user_id;
     }
 
-    public void setCreated_at(String created_at){
+    public void setCreated_at(LocalDateTime created_at){
         this.created_at = created_at;
     }
 
@@ -37,7 +39,7 @@ public class orders {
         return user_id;
     }
 
-    public String getCreated_at(){
+    public LocalDateTime getCreated_at(){
         return created_at;
     }
 
