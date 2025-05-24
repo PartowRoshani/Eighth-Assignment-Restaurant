@@ -73,6 +73,30 @@ public class OrderDatabase {
         return order;
     }
 
+
+    public static List<orders> getOrderByUserId(int user_id) throws SQLException {
+        Connection conn = DatabaseManager.connect();
+        List<orders> Orders = new ArrayList<>();
+        String query = "SELECT * FROM orders WHERE user_id = ?";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setInt(1, user_id);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Orders.add(new orders(
+                    rs.getInt("order_id"),
+                    rs.getInt("user_id"),
+                    rs.getTimestamp("created_at").toLocalDateTime(),
+                    rs.getDouble("total_price")
+            ));
+        }
+
+        rs.close();
+        ps.close();
+        conn.close();
+        return Orders;
+    }
+
     public static List<orders> getAllOrders() throws SQLException {
         List<orders> Orders = new ArrayList<>();
         Connection conn = DatabaseManager.connect();

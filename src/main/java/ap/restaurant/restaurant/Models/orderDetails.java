@@ -31,7 +31,7 @@ public class orderDetails {
         this.quantity = quantity;
     }
 
-    public void setPrice(int price){
+    public void setPrice(double price){
         this.price = price;
     }
 
