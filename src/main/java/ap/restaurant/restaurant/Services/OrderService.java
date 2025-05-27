@@ -31,9 +31,10 @@ public class OrderService {
             detail.setPrice(item.getPrice());
 
             totalPrice += item.getPrice() * detail.getQuantity();
-            order.setTotal_price(totalPrice);
 
         }
+        order.setTotal_price(totalPrice);
+
 
 
         if(order.getTotal_price() <= 0){
@@ -45,6 +46,9 @@ public class OrderService {
 
 
         int orderId = order.getOrder_id();
+        if (orderId == 0) {
+            throw new SQLException("Failed to retrieve order ID after creation.");
+        }
 
         for(orderDetails detail : details){
             menuItems item = menuItemDetabase.getMenuItemById(detail.getMenu_item_id());
@@ -58,6 +62,8 @@ public class OrderService {
             OrderDetailsDatabase.createdOrderDetails(detail);
 
         }
+        System.out.println("Order placed successfully with ID: " + orderId);
+
     }
 
     public static List<orders> AllOrdersForUser(int user_id) throws SQLException {
@@ -81,3 +87,5 @@ public class OrderService {
 
 
 }
+
+

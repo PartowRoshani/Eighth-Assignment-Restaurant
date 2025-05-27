@@ -59,7 +59,7 @@ public class menuItemDetabase {
         Connection conn = DatabaseManager.connect();
         String query = "SELECT * FROM menu_items";
         PreparedStatement ps = conn.prepareStatement(query);
-        ResultSet rs = ps.executeQuery(query);
+        ResultSet rs = ps.executeQuery();
 
         List<menuItems> items = new ArrayList<>();
 

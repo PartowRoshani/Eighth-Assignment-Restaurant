@@ -12,21 +12,35 @@ import ap.restaurant.restaurant.Models.user;
 public class UserDatabase {
 
     public static void createUser(user User )throws SQLException{
-        Connection conn = DatabaseManager.connect();
-        String query ="INSERT INTO users( username, user_password, email) VALUES( ?, ?, ?)";
-        PreparedStatement ps =conn.prepareStatement(query);
-        ps.setString(1, User.getUsername());
-        ps.setString(2, User.getPassword());
-        ps.setString(3,User.getEmail());
+        try {
+            Connection conn = DatabaseManager.connect();
+            String query = "INSERT INTO users( username, user_password, email) VALUES( ?, ?, ?)";
+            System.out.println("🟢 Trying to insert user into database...");
 
-        ps.executeUpdate();
-        ps.close();
-        conn.close();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, User.getUsername());
+            ps.setString(2, User.getPassword());
+            ps.setString(3, User.getEmail());
+
+            ps.executeUpdate();
+            System.out.println("✅ User inserted successfully.");
+
+
+            ps.close();
+            conn.close();
+        }catch(SQLException e){
+            throw e;
+        }
+
 
     }
 
     public static void updateUser(user User)throws SQLException{
+
         Connection conn = DatabaseManager.connect();
+        System.out.println("Updating user with id: " + User.getUser_id());
+
+
         String query = "UPDATE users SET username = ?, user_password = ?, email = ? WHERE user_id = ?";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setString(1, User.getUsername());
@@ -34,7 +48,9 @@ public class UserDatabase {
         ps.setString(3,User.getEmail());
         ps.setInt(4,User.getUser_id());
 
-        ps.executeUpdate();
+        int rowsAffected = ps.executeUpdate();
+        System.out.println("Rows updated: " + rowsAffected);
+
         ps.close();
         conn.close();
     }
@@ -62,7 +78,6 @@ public class UserDatabase {
         if(rs.next()){
             result = new user(
                     rs.getString("username"),
-                    rs.getInt("user_id"),
                     rs.getString("use_password"),
                     rs.getString("email")
             );
@@ -85,11 +100,12 @@ public class UserDatabase {
         user result = null;
         if(rs.next()){
             result = new user(
+
                     rs.getString("username"),
-                    rs.getInt("user_id"),
-                    rs.getString("use_password"),
+                    rs.getString("user_password"),
                     rs.getString("email")
             );
+            result.setUser_id(rs.getInt("user_id"));
 
         }
         rs.close();
@@ -108,7 +124,6 @@ public class UserDatabase {
         while (rs.next())
         {
             user u = new user( rs.getString("username"),
-                    rs.getInt("user_id"),
                     rs.getString("use_password"),
                     rs.getString("email"));
             users.add(u);
