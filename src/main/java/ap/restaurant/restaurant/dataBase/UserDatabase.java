@@ -55,12 +55,19 @@ public class UserDatabase {
         conn.close();
     }
 
-    public static void deleteUser(user User)throws SQLException{
+    public static void deleteUser(int user_id)throws SQLException{
         Connection conn = DatabaseManager.connect();
         String query = "DELETE FROM users WHERE user_id = ?";
         PreparedStatement ps = conn.prepareStatement(query);
 
-        ps.setInt(1,User.getUser_id());
+        ps.setInt(1,user_id);
+        int affectedRows = ps.executeUpdate();
+        if (affectedRows > 0) {
+            System.out.println("User deleted successfully.");
+        } else {
+            System.out.println("No user found with the given ID.");
+        }
+
         ps.executeUpdate();
         ps.close();
         conn.close();
@@ -69,7 +76,7 @@ public class UserDatabase {
 
     public static user getUserById(int userId)throws SQLException{
         Connection conn = DatabaseManager.connect();
-        String query = "SELECT * FROM users WHERE id = ?";
+        String query = "SELECT * FROM users WHERE user_id = ?";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setInt(1,userId);
 
@@ -78,7 +85,7 @@ public class UserDatabase {
         if(rs.next()){
             result = new user(
                     rs.getString("username"),
-                    rs.getString("use_password"),
+                    rs.getString("user_password"),
                     rs.getString("email")
             );
 

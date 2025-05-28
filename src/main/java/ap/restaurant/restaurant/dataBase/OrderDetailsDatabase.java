@@ -12,7 +12,7 @@ import java.util.List;
 public class OrderDetailsDatabase {
     public static void createdOrderDetails(orderDetails detail)throws SQLException{
         Connection conn = DatabaseManager.connect();
-        String query = "INSERT INTO order_details (order_id, menu_item_id, quantity, price) VALUE (?, ?, ?, ?)";
+        String query = "INSERT INTO order_details (order_id, menu_item_id, quantity, price) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setInt(1, detail.getOrder_id());
         ps.setInt(2, detail.getMenu_item_id());
@@ -34,7 +34,7 @@ public class OrderDetailsDatabase {
 
         while (rs.next()) {
             details.add(new orderDetails(
-                    rs.getInt("order_detail_id"),
+                    rs.getInt("order_details_id"),
                     rs.getInt("order_id"),
                     rs.getInt("menu_item_id"),
                     rs.getInt("quantity"),

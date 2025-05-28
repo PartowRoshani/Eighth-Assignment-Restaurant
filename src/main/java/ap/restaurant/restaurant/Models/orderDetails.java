@@ -15,6 +15,10 @@ public class orderDetails {
         this.price = price;
     }
 
+    public orderDetails() {
+
+    }
+
     public void setOrder_id(int order_id){
         this.order_id = order_id;
     }

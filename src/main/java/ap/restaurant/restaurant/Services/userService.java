@@ -69,7 +69,8 @@ public class userService {
     }
 
     public static void deleteAccount(user User)throws SQLException{
-        UserDatabase.deleteUser(User);
+        int user_id = User.getUser_id();
+        UserDatabase.deleteUser(user_id);
     }
 
     public static void changePassword(String username , String newPassword) throws SQLException {

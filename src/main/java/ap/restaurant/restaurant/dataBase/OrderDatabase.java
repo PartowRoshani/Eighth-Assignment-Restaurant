@@ -10,13 +10,25 @@ public class OrderDatabase {
 
     public static void createOrder(orders order) throws SQLException{
         Connection conn = DatabaseManager.connect();
-        String query = "INSERT INTO orders(user_id, created_at, total_price) VALUES (?, ?, ?)";
+        String query = "INSERT INTO orders(user_id, created_at, total_price) VALUES (?, ?, ?) RETURNING order_id";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setInt(1, order.getUser_id());
         ps.setTimestamp(2, Timestamp.valueOf(order.getCreated_at()));
         ps.setDouble(3, order.getTotal_price());
+        ResultSet rs = ps.executeQuery();
 
-        ps.executeUpdate();
+        if (rs.next())
+        {
+            int generatedId = rs.getInt("order_id");
+            order.setOrder_id(generatedId);
+        }
+        else
+        {
+            throw new SQLException("Failed to retrieve generated order ID.");
+        }
+
+
+        rs.close();
         ps.close();
         conn.close();
     }
