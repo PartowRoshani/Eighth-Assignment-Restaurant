@@ -111,15 +111,15 @@ public class RestaurantApp extends Application {
 
 
 
-                    boolean Register = controller.registerCtrl(username, password, email);
+            boolean Register = controller.registerCtrl(username, password, email);
 
-                    if (Register) {
-                            showAlert(Alert.AlertType.INFORMATION, "Success", "Registration successful! You can now login.");
-                            showDashboard(primaryStage, username);
-                    }
-                    else {
-                        showAlert(Alert.AlertType.INFORMATION, "Error", "Registration  not successful! try again.");
-                    }
+            if (Register) {
+                showAlert(Alert.AlertType.INFORMATION, "Success", "Registration successful! You can now login.");
+                showDashboard(primaryStage, username);
+            }
+            else {
+                showAlert(Alert.AlertType.INFORMATION, "Error", "Registration  not successful! try again.");
+            }
         });
     }
 
@@ -168,7 +168,7 @@ public class RestaurantApp extends Application {
             if (login) {
                 showDashboard(primaryStage, username);
             }
-             else {
+            else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Login Failed");
                 alert.setHeaderText(null);
@@ -259,7 +259,6 @@ public class RestaurantApp extends Application {
                                 orderDetailsList.add(detail);
                             }
                         } catch (NumberFormatException ignored) {
-                            // Invalid number typed, ignore
                         }
                     });
                 }
@@ -536,7 +535,7 @@ public class RestaurantApp extends Application {
         btnDeleteAccount.setOnAction(e -> {
             user userToDelete = null;
             try {
-                 userToDelete = UserDatabase.getUserByUsername(username);
+                userToDelete = UserDatabase.getUserByUsername(username);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
