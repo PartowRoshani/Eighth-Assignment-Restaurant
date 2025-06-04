@@ -3,7 +3,7 @@
 
 ## 📘 Overview
 
-The **Restaurant Management System** is a desktop-based application developed using **JavaFX** and backed by a **PostgreSQL** database. It enables customers to register, log in, browse the menu (with images), place and view orders, and manage their profiles. Admins can manage items and users with extended privileges.
+The **Restaurant Management System** is a desktop-based application developed using **JavaFX** and backed by a **PostgreSQL** database. It enables customers to register, log in, browse the menu , place and view orders, and manage their profiles. 
 
 ---
 
