@@ -75,16 +75,14 @@ The schema is defined in `init.sql`, which includes both table definitions and s
 | PostgreSQL     | Persistent database          |
 | JDBC           | Database connectivity        |
 | Gradle         | Build automation             |
-| FXML (optional)| UI structure (if used)       |
 
 ---
 
 ## 🧪 How to Run the Project
 
 1. Setup PostgreSQL and run `init.sql`
-2. Place images in `src/main/resources/images/` named `1.jpg`, `2.jpg`, ...
-3. Open the project in IntelliJ or Eclipse
-4. Run `RestaurantApp.java` from `UI` package
+2. Open the project in IntelliJ or Eclipse
+3. Run `RestaurantApp.java` from `UI` package
 
 ---
 
